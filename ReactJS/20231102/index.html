@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <div id="root"></div>
+</body>
+<script src="https://unpkg.com/react@17.0.2/umd/react.production.min.js"></script>
+<script src="https://unpkg.com/react-dom@17.0.2/umd/react-dom.production.min.js"></script>
+<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+<script type="text/babel">
+  const root = document.getElementById("root")
+  // const h3 = React.createElement("h3", 
+  //   { 
+  //     onMouseEnter: () => console.log('mouse enter'),
+  //   }, 
+  //   "Hello I'm a h3") 
+  // {} : property
+  // element도 작성 가능
+  // ReactDOM.render(span, root) // render : 사용자에게 보여준다
+  // span 태그를 생성하고 root id를 가진 div태그 안에 property를 포함해서 넣음
+
+  // JSX : 코드를 브라우저가 이해할 수 있도록 script src에 바벨 import 해줘야한다
+  const Title = () => (
+    <h3 id="title" onMouseEnter={() => console.log('mouse enter')}>
+      Hello I'm a title
+    </h3>
+  )
+  const Button = () => (
+    <button
+      style={{
+        backgroundColor: "tomato"
+      }}
+      onClick={() => console.log("i'm clicked")}
+    >
+      Click me</button>
+  )
+  // arrow functio은 그냥 function에서 return이 생략된
+
+
+  // const btn = React.createElement("button", {
+  //   style: { backgroundColor: "tomato" },
+  //   onClick: () => console.log("i'm clicked")
+  // }, "Click me")
+  // property에 eventListener를 등록할 수 있다
+  // eventlistener는 html에 뜨지 않는다
+  const Container = () => (
+    <div>
+      <button>Hello</button>
+      <Title />
+      <Button />
+    </div>
+  )
+  // 생성한 컴포넌트는 대문자로 작성 해야만한다 (소문자는 HTML 태그)
+  ReactDOM.render(<Container />, root)
+</script>
+
+</html>
