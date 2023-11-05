@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="root"></div>
+</body>
+<script src="https://unpkg.com/react@17.0.2/umd/react.production.min.js"></script>
+<script src="https://unpkg.com/react-dom@17.0.2/umd/react-dom.production.min.js"></script>
+<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+<script type="text/babel">
+    const root = document.getElementById("root")
+    let counter = 0
+    function countUp() {
+        counter++
+        render()
+    }
+    function render() {
+        ReactDOM.render(<Container />, root)
+    }
+    // counter가 증가할 때마다 rerender를 해줌으로써 UI를 최신화 해줌
+    // render를 하더라도 모든 항목을 재 렌더를 안해서 효율적이다
+    const Container = () => (
+        <div>
+            <h3>Total Click: {counter}</h3>
+            <button onClick={countUp}>Click me</button>
+        </div>
+    )
+    render()
+    // createElement
+    // JSX 변수를 전달할 때 백틱 없이 {}로만 전달 가능
+    // render 함수에 작성했더라도 초기 렌더를 위해서 마지막에 생략하면 안됨
+</script>
+
+</html>
