@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <div id="root"></div>
+</body>
+<script src="https://unpkg.com/react@17.0.2/umd/react.production.min.js"></script>
+<script src="https://unpkg.com/react-dom@17.0.2/umd/react-dom.production.min.js"></script>
+<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+<script type="text/babel">
+  const root = document.getElementById("root")
+    function MinutesToHours() {
+    const [amount, setAmount] = React.useState(0)
+    const [inverted, setInverted] = React.useState(false)
+    const onChange = (event) => {
+      // console.log(event)
+      // SyntheticBaseEvent 가짜 event 발생 -> event 최적화
+      setAmount(event.target.value)
+    }
+    const reset = () => setAmount(0)
+    const onInvert = () => {
+      setInverted((current) => !current)
+      reset()
+    }
+    // 인자로 받은 값을 t/f 전환
+    return (
+      <div>
+        <div>
+          <label htmlFor="Minutes">Minutes</label>
+          <input
+            value={inverted ? amount * 60 : amount}
+            id="Minutes"
+            placeholder="Minutes"
+            type="number"
+            onChange={onChange}
+            disabled={inverted}
+          />
+        </div>
+
+        <div>
+          <label htmlFor="Hours">Hours</label>
+          <input 
+          value={inverted ? amount : Math.round(amount / 60) }
+          // 삼항 연산자 = if문을 inline style로 작성했다고 봐도 됨
+          id="Hours" 
+          placeholder="Hours" 
+          type="number"
+          onChange={onChange}
+          disabled={!inverted}
+          />
+        </div>
+        <button onClick={reset}>Reset</button>
+        <button onClick={onInvert}>{inverted ? "Turn back" : "Invert"}</button>
+      </div>
+      // 오직 value 만 리렌더링 되고 있음
+    )
+  }
+  // HTML 식 표현
+  // <div>
+  //     <h1 className='hi'>Super Converter</h1>
+  //     <label htmlFor="Minutes">Minutes</label>
+  //     <input id="Minutes" placeholder="Minutes" type="number"/>
+  //     <label htmlFor="Hours">Hours</label>
+  //     <input id="Hours" placeholder="Hours" type="number"/>
+  // </div>
+
+  function KmToMiles() {
+    return <h3>KM 2 M</h3>
+  }
+
+  function App() {
+
+    return (
+      <div>
+        <h1 className='hi'>Super Converter</h1>
+        <MinutesToHours />
+        <KmToMiles />
+      </div>
+    )
+  }
+  ReactDOM.render(<App />, root)
+  // DOM property로 그냥 class는 사용할 수 없다 / for문도 사용할 수 없다
+</script>
+
+</html>
