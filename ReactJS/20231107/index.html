@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <div id="root"></div>
+</body>
+<script src="https://unpkg.com/react@17.0.2/umd/react.development.js"></script>
+<script src="https://unpkg.com/react-dom@17.0.2/umd/react-dom.production.min.js"></script>
+<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+<script src="https://unpkg.com/prop-types@15.7.2/prop-types.js"></script>
+<!-- prop type이 뭔지 알려줌 -->
+
+<script type="text/babel">
+  function Btn({ text, fontSize = 16 }) {
+    // 정의되지 않은 props의 기본 값도 정해줄 수 있다.
+    return <button
+      // onClick={changeValue}
+      // props를 전달하더라도 자동으로 return에 전달되는 것이 아니기 때문에 작성해야한다.
+      style={{
+        backgroundColor: "tomato",
+        color: "white",
+        padding: "10px 20px",
+        border: 0,
+        borderRadius: 10,
+        fontSize,
+      }}
+    >
+      {text}
+    </button>
+  }
+  Btn.propTypes = {
+    text: PropTypes.string.isRequired,
+    fontSize: PropTypes.number,
+  }
+  // propTypes가 맞지 않을 경우 console창에 error 메세지를 띄워줌
+  // .isRequired 를 통해서 필수항목으로 지정할 수 있음
+
+  // const MemorizedBtn = React.memo(Btn)
+  // memo = memorize, state가 변경될 때만 rerender 시킨다
+  function App() {
+    const [value, setValue] = React.useState("Save Changes")
+    const changeValue = () => setValue("Revert Changes")
+    return (
+      <div>
+        <Btn text="Save Changes" fontSize={18} />
+        <Btn text={"Continue"} />
+      </div>
+    )
+  }
+  // <MemorizedBtn text={value} changeValue={changeValue} />
+  // <MemorizedBtn text="Continue" />
+  const root = document.getElementById("root")
+  ReactDOM.render(<App />, root)
+</script>
+
+</html>
